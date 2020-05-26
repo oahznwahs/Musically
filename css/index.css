@@ -255,7 +255,7 @@ dd {
   outline: none;
   background-color: #f1f3f4;
 }
-/* 旋转的动画 */
+/* rotating animation */
 @keyframes Rotate {
   from {
     transform: rotateZ(0);
@@ -264,7 +264,7 @@ dd {
     transform: rotateZ(360deg);
   }
 }
-/* 旋转的类名 */
+/* rotating class */
 .autoRotate {
   animation-name: Rotate;
   animation-iteration-count: infinite;
@@ -272,7 +272,7 @@ dd {
   animation-timing-function: linear;
   animation-duration: 5s;
 }
-/* 是否正在播放 */
+/* whether music plays */
 .player_con.playing .disc,
 .player_con.playing .cover {
   animation-play-state: running;
@@ -287,11 +287,11 @@ dd {
   transform-origin: 12px 12px;
   transition: 1s;
 }
-/* 播放杆 转回去 */
+/* bar animation */
 .player_con.playing .play_bar {
   transform: rotate(0);
 }
-/* 搜索历史列表 */
+/* search history */
 .search_history {
   position: absolute;
   width: 296px;
