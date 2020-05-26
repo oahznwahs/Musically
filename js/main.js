@@ -1,53 +1,56 @@
 /*
-  1:歌曲搜索接口
-    请求地址:https://autumnfish.cn/search
-    请求方法:get
-    请求参数:keywords(查询关键字)
-    响应内容:歌曲搜索结果
+  1:music search API
+    request url:https://autumnfish.cn/search
+    request method:get
+    request parameter:keywords
+    response:search result
 
-  2:歌曲url获取接口
-    请求地址:https://autumnfish.cn/song/url
-    请求方法:get
-    请求参数:id(歌曲id)
-    响应内容:歌曲url地址
-  3.歌曲详情获取
-    请求地址:https://autumnfish.cn/song/detail
-    请求方法:get
-    请求参数:ids(歌曲id)
-    响应内容:歌曲详情(包括封面信息)
-  4.热门评论获取
-    请求地址:https://autumnfish.cn/comment/hot?type=0
-    请求方法:get
-    请求参数:id(歌曲id,地址中的type固定为0)
-    响应内容:歌曲的热门评论
-  5.mv地址获取
-    请求地址:https://autumnfish.cn/mv/url
-    请求方法:get
-    请求参数:id(mvid,为0表示没有mv)
-    响应内容:mv的地址
+  2:music url API
+    request url:https://autumnfish.cn/song/url
+    request method:get
+    request parameter:id
+    repsonse: music url
+    
+  3.music info
+    request url:https://autumnfish.cn/song/detail
+    request method:get
+    requets paramter:ids
+    repsonse:music infor(cover page)
+    
+  4.popular comments
+    request url:https://autumnfish.cn/comment/hot?type=0
+    request method:get
+    reuqest parameter:id
+    response:popular comments for the song
+    
+  5.mv url
+    request url:https://autumnfish.cn/mv/url
+    request method:get
+    resquest parameter:id(0 means no resources)
+    response:mv url
 */
 var app = new Vue({
   el: "#player",
   data: {
-    // 查询关键字
+    // keyword
     query: "",
-    // 歌曲数组
+    // music list
     musicList: [],
-    // 歌曲地址
+    // music url
     musicUrl: "",
-    // 歌曲封面
+    // cover
     musicCover: "",
-    // 歌曲评论
+    // comments
     hotComments: [],
-    // 动画播放状态
+    // animation status
     isPlaying: false,
-    // 遮罩层的显示状态
+    // mv interface status
     isShow: false,
-    // mv地址
+    // mv url
     mvUrl: ""
   },
   methods: {
-    // 歌曲搜索
+    // search
     searchMusic: function() {
       var that = this;
       axios.get("https://autumnfish.cn/search?keywords=" + this.query).then(
@@ -59,11 +62,11 @@ var app = new Vue({
         function(err) {}
       );
     },
-    // 歌曲播放
+    // play
     playMusic: function(musicId) {
       //   console.log(musicId);
       var that = this;
-      // 获取歌曲地址
+      // retrive music url
       axios.get("https://autumnfish.cn/song/url?id=" + musicId).then(
         function(response) {
           // console.log(response);
@@ -73,7 +76,7 @@ var app = new Vue({
         function(err) {}
       );
 
-      // 歌曲详情获取
+      // mmusic info
       axios.get("https://autumnfish.cn/song/detail?ids=" + musicId).then(
         function(response) {
           // console.log(response);
@@ -83,7 +86,7 @@ var app = new Vue({
         function(err) {}
       );
 
-      // 歌曲评论获取
+      // music comments
       axios.get("https://autumnfish.cn/comment/hot?type=0&id=" + musicId).then(
         function(response) {
           // console.log(response);
@@ -93,17 +96,17 @@ var app = new Vue({
         function(err) {}
       );
     },
-    // 歌曲播放
+    // play
     play: function() {
       // console.log("play");
       this.isPlaying = true;
     },
-    // 歌曲暂停
+    // pause
     pause: function() {
       // console.log("pause");
       this.isPlaying = false;
     },
-    // 播放mv
+    // play mv
     playMV: function(mvid) {
       var that = this;
       axios.get("https://autumnfish.cn/mv/url?id=" + mvid).then(
@@ -116,7 +119,7 @@ var app = new Vue({
         function(err) {}
       );
     },
-    // 隐藏
+    // hide
     hide: function() {
       this.isShow = false;
     }
